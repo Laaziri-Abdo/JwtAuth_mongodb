@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-const bcrypt = require('bcrypt');
+// const bcrypt = require('bcrypt');
 // creating user Schema
 const UserSchema = new mongoose.Schema({
     username : {
@@ -25,20 +25,20 @@ const UserSchema = new mongoose.Schema({
 });
 
 // Schema methods
-UserSchema.pre('save', function(next) {
-    const user = this;
-    // only hash the password if it has been modified (or is new)
-    if (!user.isModified('password')) return next();
+// UserSchema.pre('save', function(next) {
+//     const user = this;
+//     // only hash the password if it has been modified (or is new)
+//     if (!user.isModified('password')) return next();
 
-    bcrypt.hash(user.password, 10).then((hashedPass) => {
-        user.password = hashedPass;
-        next();
-    });
-});
+//     bcrypt.hash(user.password, 10).then((hashedPass) => {
+//         user.password = hashedPass;
+//         next();
+//     });
+// });
 
-UserSchema.methods.comparePasswords = function(password) {
-    return bcrypt.compare(password, this.password);
-}
+// UserSchema.methods.comparePasswords = function(password) {
+//     return bcrypt.compare(password, this.password);
+// }
 
 // creating the model
 const User = mongoose.model('User', UserSchema);
